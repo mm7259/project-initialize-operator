@@ -20,6 +20,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 	"sigs.k8s.io/controller-runtime/pkg/source"
+	bitbucketinit "scm/init"
 )
 
 var log = logf.Log.WithName("controller_projectinitialize")
@@ -119,6 +120,10 @@ func (r *ReconcileProjectInitialize) Reconcile(request reconcile.Request) (recon
 			return reconcile.Result{}, err
 		}
 		// TODO setup ArgoCD, Qoutas, GIT and LDAP
+
+		//setting up git 
+		bitbucketClient := bitbucketinit.GitInit()
+
 		logging.Log.Info(fmt.Sprintf("Created new project %s", newProject.Name))
 	} else {
 		logging.Log.Info(fmt.Sprintf("Found project %s", found.Name))
