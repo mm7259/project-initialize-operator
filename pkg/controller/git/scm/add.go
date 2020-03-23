@@ -1,3 +1,4 @@
+package bitbucketadd
 /* Folder structure of ArgoCD should be TEAM (Root folder) ---> Clusters (ex NP1, NP2) ---> Environments (ex SIT, DEV), Applications (ex App1, App2) */
 
 func GitAddCluster(){
