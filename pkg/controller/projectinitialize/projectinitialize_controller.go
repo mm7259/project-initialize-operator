@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	bitbucketinit "github.com/mm7259/project-initialize-operator/project-initialize/pkg/controller/git"
 	projectset "github.com/openshift/client-go/project/clientset/versioned/typed/project/v1"
 	redhatcopv1alpha1 "github.com/redhat-cop/project-initialize-operator/project-initialize/pkg/apis/redhatcop/v1alpha1"
 	projectinit "github.com/redhat-cop/project-initialize-operator/project-initialize/pkg/controller/projectinitialize/ocp/project"
@@ -20,7 +21,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 	"sigs.k8s.io/controller-runtime/pkg/source"
-	bitbucketinit "scm/init"
 )
 
 var log = logf.Log.WithName("controller_projectinitialize")
@@ -121,7 +121,7 @@ func (r *ReconcileProjectInitialize) Reconcile(request reconcile.Request) (recon
 		}
 		// TODO setup ArgoCD, Qoutas, GIT and LDAP
 
-		//setting up git 
+		//setting up git
 		bitbucketClient := bitbucketinit.GitInit()
 
 		logging.Log.Info(fmt.Sprintf("Created new project %s", newProject.Name))
